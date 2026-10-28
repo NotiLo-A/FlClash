@@ -169,10 +169,11 @@ class Bootstrap {
     unawaited(
       autoLaunch?.updateStatus(_container.read(appSettingProvider).autoLaunch),
     );
-    if (!_container.read(appSettingProvider).silentLaunch) {
-      unawaited(window?.show());
-    } else {
+    if (cli.options.isMinimized ||
+        _container.read(appSettingProvider).silentLaunch) {
       unawaited(window?.hide());
+    } else {
+      unawaited(window?.show());
     }
     await _handleFailedPreference();
     if (!await _handlerDisclaimer()) {
@@ -184,6 +185,9 @@ class Bootstrap {
       await _container.read(setupActionProvider.notifier).initStatus();
     }
     _container.read(initProvider.notifier).value = true;
+    if (cli.options.isStart) {
+      unawaited(_container.read(setupActionProvider.notifier).setRunning(true));
+    }
     unawaited(_container.read(resourcesActionProvider.notifier).autoUpdate());
     await bootGuard.markRunning();
     unawaited(_container.read(locationPermissionsProvider.notifier).refresh());

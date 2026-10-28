@@ -3,6 +3,7 @@ export 'app_ports.dart';
 export 'backup.dart';
 export 'changelog.dart';
 export 'cidr.dart';
+export 'cli.dart';
 export 'compute.dart';
 export 'constant.dart';
 export 'context.dart';

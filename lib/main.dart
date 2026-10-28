@@ -25,6 +25,7 @@ void main(List<String> args) {
         );
       }
       if (Platform.isLinux) {
+        cli.options = CliOptions.fromArgs(args);
         linkManager.seedInitialLink(args);
       }
       FlutterError.onError = (details) {

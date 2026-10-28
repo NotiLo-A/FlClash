@@ -41,8 +41,10 @@ Widget buildManagerStack({
   final platformState = isDesktop
       ? WindowManager(
           terminateSignals: terminateSignals,
-          child: TrayManager(
-            child: HotKeyManager(child: ProxyManager(child: state)),
+          child: CliManager(
+            child: TrayManager(
+              child: HotKeyManager(child: ProxyManager(child: state)),
+            ),
           ),
         )
       : AndroidManager(child: TileManager(child: state));
